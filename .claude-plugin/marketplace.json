@@ -1,0 +1,14 @@
+{
+  "name": "be",
+  "owner": {
+    "name": "Alistair Miles"
+  },
+  "description": "A marketplace providing the be plugin.",
+  "plugins": [
+    {
+      "name": "be",
+      "source": "./plugins/be",
+      "description": "Persona skills for your coding agents."
+    }
+  ]
+}
