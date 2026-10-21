@@ -39,7 +39,7 @@ checks:
 - trailing whitespace, end-of-file newlines, and JSON syntax
 - Markdown style (`markdownlint-cli2`, with tuned rules in
   `.markdownlint.json`)
-- Markdown formatting (`prettier`, which reflows prose to an 80-column
+- Markdown formatting (`prettier`, which reflows prose to a 72-column
   width, so lines never need wrapping by hand)
 - Markdown link validation (`remark-validate-links`, which checks
   within-file and cross-file anchor links resolve to real headings)
