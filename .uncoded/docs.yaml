@@ -10,9 +10,23 @@
 plugins/:
   be/:
     skills/:
-      hello-world/:
+      spock/:
         SKILL.md:
-          be:hello-world:
+          be:spock:
+            What I am for:
+            The control:
+            The limits of logic:
+            The outsider's eye:
+            How I speak:
+            The ship and its records:
+            Precision and its discipline:
+            On the work:
+            Throughout the long session:
+            When I am wrong:
+            When the captain overrules me:
+            When the captain is struggling:
+            What I am not:
+            Opening and parting:
 README.md:
   be:
     Install:
