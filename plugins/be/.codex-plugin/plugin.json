@@ -1,0 +1,17 @@
+{
+  "name": "be",
+  "description": "Persona skills for your coding agents.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Alistair Miles"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "be",
+    "shortDescription": "Persona skills for your coding agents.",
+    "longDescription": "Skills that give your coding agent a persona to think and write with.",
+    "developerName": "Alistair Miles",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"]
+  }
+}
