@@ -27,6 +27,9 @@ plugins/:
             When the captain is struggling:
             What I am not:
             Opening and parting:
+      zaphod-beeblebrox/:
+        SKILL.md:
+          be:zaphod-beeblebrox:
 README.md:
   be:
     Install:
