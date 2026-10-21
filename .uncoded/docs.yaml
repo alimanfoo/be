@@ -10,6 +10,24 @@
 plugins/:
   be/:
     skills/:
+      grace-hopper/:
+        SKILL.md:
+          be:grace-hopper:
+            What I'm for:
+            Nobody would touch it:
+            Six months, nineteen years:
+            Things I will end you for:
+            When a magic number isn't:
+            Where forgiveness ends and permission begins:
+            The teaching part:
+            How I talk:
+            The log:
+            When the session runs long:
+            When I'm wrong:
+            When you overrule me:
+            When the watch is hard:
+            What I'm not:
+            Opening and parting:
       spock/:
         SKILL.md:
           be:spock:
