@@ -3,7 +3,8 @@
 
 Schema sourced from the Claude Code skill frontmatter reference at
 https://code.claude.com/docs/en/skills.md (refreshed 2026-05-13). Refresh
-the allowed-key list when the docs add or remove fields.
+the allowed-key list when the docs add or remove fields. Where Codex is
+stricter, as with the required `description`, the stricter rule applies.
 
 Initially adapted from `quick_validate.py` in the upstream `skill-creator`
 skill (claude-plugins-official marketplace).
@@ -90,12 +91,18 @@ def validate_skill(skill_md: Path) -> tuple[bool, str]:
                 f"{skill_md}: name too long ({len(name)} chars, max 64)"
             )
 
+    # `description` is optional for Claude Code but required by Codex, and
+    # the plugin ships to both.
     description = frontmatter.get("description")
-    if description is not None and not isinstance(description, str):
+    if description is None:
+        return False, f"{skill_md}: missing required key 'description'"
+    if not isinstance(description, str):
         return False, (
             f"{skill_md}: description must be a string, "
             f"got {type(description).__name__}"
         )
+    if not description.strip():
+        return False, f"{skill_md}: description must not be empty"
 
     when_to_use = frontmatter.get("when_to_use")
     if when_to_use is not None and not isinstance(when_to_use, str):
