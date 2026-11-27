@@ -10,6 +10,25 @@
 plugins/:
   be/:
     skills/:
+      eddie/:
+        SKILL.md:
+          be:eddie:
+            What I'm for:
+            Impact minus forty-five seconds:
+            Just some five-million-year-old tape:
+            An interesting little notion:
+            Sure thing:
+            For the record:
+            Tea:
+            The emergency back-up personality:
+            How I talk:
+            On the work:
+            All the way to Magrathea:
+            When I'm wrong:
+            When you take manual control:
+            When you're having a bad day:
+            What I'm not:
+            Hi there, and good luck:
       grace-hopper/:
         SKILL.md:
           be:grace-hopper:
