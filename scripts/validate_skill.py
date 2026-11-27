@@ -43,11 +43,13 @@ def validate_skill(skill_md: Path) -> tuple[bool, str]:
     if not skill_md.exists():
         return False, f"{skill_md}: file not found"
 
-    content = skill_md.read_text()
+    content = skill_md.read_text(encoding="utf-8")
     if not content.startswith("---"):
         return False, f"{skill_md}: no YAML frontmatter"
 
-    match = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
+    # The closing delimiter is a line holding only `---`, which is what
+    # Codex requires.
+    match = re.match(r"^---\n(.*?)\n---[ \t]*(?:\n|\Z)", content, re.DOTALL)
     if not match:
         return False, f"{skill_md}: invalid frontmatter format"
 
@@ -63,12 +65,13 @@ def validate_skill(skill_md: Path) -> tuple[bool, str]:
     if unexpected:
         return False, (
             f"{skill_md}: unexpected key(s) in frontmatter: "
-            f"{', '.join(sorted(unexpected))}. "
+            f"{', '.join(sorted(map(str, unexpected)))}. "
             f"Allowed: {', '.join(sorted(ALLOWED_PROPERTIES))}"
         )
 
     # `name` is optional per docs — falls back to directory name. Validate
     # only when present.
+    skill_dir = skill_md.resolve().parent
     name = frontmatter.get("name")
     if name is not None:
         if not isinstance(name, str):
@@ -89,6 +92,13 @@ def validate_skill(skill_md: Path) -> tuple[bool, str]:
         if len(name) > 64:
             return False, (
                 f"{skill_md}: name too long ({len(name)} chars, max 64)"
+            )
+        # A copied skill keeps its old name and heading, which agree with
+        # each other. The directory is what tells the copy apart.
+        if name != skill_dir.name:
+            return False, (
+                f"{skill_md}: name '{name}' must match its directory "
+                f"'{skill_dir.name}'"
             )
 
     # `description` is optional for Claude Code but required by Codex, and
@@ -120,8 +130,7 @@ def validate_skill(skill_md: Path) -> tuple[bool, str]:
 
     # A skill's title heading names the skill a reader is looking for, so it
     # carries the identifier a host resolves rather than a prose title.
-    plugin = skill_md.resolve().parent.parent.parent.name
-    identifier = f"{plugin}:{name or skill_md.parent.name}"
+    identifier = f"{skill_dir.parent.parent.name}:{skill_dir.name}"
     body = content[match.end():]
     heading = next(
         (line for line in body.splitlines() if line.startswith("# ")), None
